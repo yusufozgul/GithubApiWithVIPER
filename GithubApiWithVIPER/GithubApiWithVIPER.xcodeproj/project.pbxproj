@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		88B6C5842466D8970031D87A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6C5832466D8970031D87A /* AppDelegate.swift */; };
 		88B6C5862466D8970031D87A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6C5852466D8970031D87A /* SceneDelegate.swift */; };
-		88B6C5882466D8980031D87A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6C5872466D8980031D87A /* ViewController.swift */; };
 		88B6C58B2466D8980031D87A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B6C5892466D8980031D87A /* Main.storyboard */; };
 		88B6C58D2466D8980031D87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88B6C58C2466D8980031D87A /* Assets.xcassets */; };
 		88B6C5902466D8980031D87A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B6C58E2466D8980031D87A /* LaunchScreen.storyboard */; };
+		8AA833622466DB3C0042C441 /* GithubSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833612466DB3C0042C441 /* GithubSearchViewController.swift */; };
+		8AA833642466DB660042C441 /* GithubSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833632466DB660042C441 /* GithubSearchPresenter.swift */; };
+		8AA833662466DB950042C441 /* GithubSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833652466DB950042C441 /* GithubSearchInteractor.swift */; };
+		8AA833682466DBA50042C441 /* GithubSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833672466DBA50042C441 /* GithubSearchRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		88B6C5802466D8970031D87A /* GithubApiWithVIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubApiWithVIPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B6C5832466D8970031D87A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88B6C5852466D8970031D87A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		88B6C5872466D8980031D87A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		88B6C58A2466D8980031D87A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88B6C58C2466D8980031D87A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88B6C58F2466D8980031D87A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88B6C5912466D8980031D87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AA833612466DB3C0042C441 /* GithubSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchViewController.swift; sourceTree = "<group>"; };
+		8AA833632466DB660042C441 /* GithubSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchPresenter.swift; sourceTree = "<group>"; };
+		8AA833652466DB950042C441 /* GithubSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchInteractor.swift; sourceTree = "<group>"; };
+		8AA833672466DBA50042C441 /* GithubSearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,34 @@
 		88B6C5822466D8970031D87A /* GithubApiWithVIPER */ = {
 			isa = PBXGroup;
 			children = (
+				8AA8335F2466DADB0042C441 /* module */,
 				88B6C5832466D8970031D87A /* AppDelegate.swift */,
 				88B6C5852466D8970031D87A /* SceneDelegate.swift */,
-				88B6C5872466D8980031D87A /* ViewController.swift */,
 				88B6C5892466D8980031D87A /* Main.storyboard */,
 				88B6C58C2466D8980031D87A /* Assets.xcassets */,
 				88B6C58E2466D8980031D87A /* LaunchScreen.storyboard */,
 				88B6C5912466D8980031D87A /* Info.plist */,
 			);
 			path = GithubApiWithVIPER;
+			sourceTree = "<group>";
+		};
+		8AA8335F2466DADB0042C441 /* module */ = {
+			isa = PBXGroup;
+			children = (
+				8AA833602466DB0C0042C441 /* search */,
+			);
+			path = module;
+			sourceTree = "<group>";
+		};
+		8AA833602466DB0C0042C441 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				8AA833612466DB3C0042C441 /* GithubSearchViewController.swift */,
+				8AA833632466DB660042C441 /* GithubSearchPresenter.swift */,
+				8AA833652466DB950042C441 /* GithubSearchInteractor.swift */,
+				8AA833672466DBA50042C441 /* GithubSearchRouter.swift */,
+			);
+			path = search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88B6C5882466D8980031D87A /* ViewController.swift in Sources */,
+				8AA833662466DB950042C441 /* GithubSearchInteractor.swift in Sources */,
 				88B6C5842466D8970031D87A /* AppDelegate.swift in Sources */,
+				8AA833622466DB3C0042C441 /* GithubSearchViewController.swift in Sources */,
+				8AA833642466DB660042C441 /* GithubSearchPresenter.swift in Sources */,
+				8AA833682466DBA50042C441 /* GithubSearchRouter.swift in Sources */,
 				88B6C5862466D8970031D87A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +313,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 97EC2NEAR5;
 				INFOPLIST_FILE = GithubApiWithVIPER/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,7 +332,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 97EC2NEAR5;
 				INFOPLIST_FILE = GithubApiWithVIPER/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
