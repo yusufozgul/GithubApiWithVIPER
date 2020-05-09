@@ -10,6 +10,8 @@ import Foundation
 
 protocol GithubSearchPresenterInterface: class {
     func viewDidLoad()
+    
+    func searchBarTextDidChange(text: String)
 }
 
 class GithubSearchPresenter {
@@ -27,6 +29,22 @@ class GithubSearchPresenter {
 
 extension GithubSearchPresenter: GithubSearchPresenterInterface {
     func viewDidLoad() {
-        
+        view?.prepareUI()
+    }
+    
+    func searchBarTextDidChange(text: String) {
+        interactor.search(with: text)
+    }
+}
+
+extension GithubSearchPresenter: GithubSearchInteractorOutput {
+    func handleSearchResult(with result: SearchResult) {
+        switch result {
+        case .success(let response):
+            //TODO: Gelen response işlendikten sonra UI'a gönderilecek
+            break
+        case .failure(_):
+            break
+        }
     }
 }

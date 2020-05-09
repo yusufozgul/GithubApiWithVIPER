@@ -14,9 +14,23 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5eh-1x-cGC">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5eh-1x-cGC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6FD-bQ-I2e"/>
+                            <constraint firstItem="5eh-1x-cGC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ds7-C8-IVC"/>
+                            <constraint firstItem="5eh-1x-cGC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="h6O-2M-c1f"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="5eh-1x-cGC" id="KBN-aY-8Bt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
