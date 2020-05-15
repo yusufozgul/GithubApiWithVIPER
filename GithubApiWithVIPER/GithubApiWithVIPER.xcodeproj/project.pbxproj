@@ -12,6 +12,9 @@
 		88B6C58B2466D8980031D87A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B6C5892466D8980031D87A /* Main.storyboard */; };
 		88B6C58D2466D8980031D87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88B6C58C2466D8980031D87A /* Assets.xcassets */; };
 		88B6C5902466D8980031D87A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B6C58E2466D8980031D87A /* LaunchScreen.storyboard */; };
+		88FDC26C246EB81500FD4351 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FDC269246EB81500FD4351 /* ApiService.swift */; };
+		88FDC26D246EB81500FD4351 /* ApiExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FDC26A246EB81500FD4351 /* ApiExtensions.swift */; };
+		88FDC26E246EB81500FD4351 /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FDC26B246EB81500FD4351 /* ApiUrls.swift */; };
 		8AA833622466DB3C0042C441 /* GithubSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833612466DB3C0042C441 /* GithubSearchViewController.swift */; };
 		8AA833642466DB660042C441 /* GithubSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833632466DB660042C441 /* GithubSearchPresenter.swift */; };
 		8AA833662466DB950042C441 /* GithubSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA833652466DB950042C441 /* GithubSearchInteractor.swift */; };
@@ -26,6 +29,9 @@
 		88B6C58C2466D8980031D87A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88B6C58F2466D8980031D87A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88B6C5912466D8980031D87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88FDC269246EB81500FD4351 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		88FDC26A246EB81500FD4351 /* ApiExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiExtensions.swift; sourceTree = "<group>"; };
+		88FDC26B246EB81500FD4351 /* ApiUrls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
 		8AA833612466DB3C0042C441 /* GithubSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchViewController.swift; sourceTree = "<group>"; };
 		8AA833632466DB660042C441 /* GithubSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchPresenter.swift; sourceTree = "<group>"; };
 		8AA833652466DB950042C441 /* GithubSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchInteractor.swift; sourceTree = "<group>"; };
@@ -62,6 +68,7 @@
 		88B6C5822466D8970031D87A /* GithubApiWithVIPER */ = {
 			isa = PBXGroup;
 			children = (
+				88FDC268246EB80400FD4351 /* API */,
 				8AA8335F2466DADB0042C441 /* module */,
 				88B6C5832466D8970031D87A /* AppDelegate.swift */,
 				88B6C5852466D8970031D87A /* SceneDelegate.swift */,
@@ -71,6 +78,16 @@
 				88B6C5912466D8980031D87A /* Info.plist */,
 			);
 			path = GithubApiWithVIPER;
+			sourceTree = "<group>";
+		};
+		88FDC268246EB80400FD4351 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				88FDC26A246EB81500FD4351 /* ApiExtensions.swift */,
+				88FDC269246EB81500FD4351 /* ApiService.swift */,
+				88FDC26B246EB81500FD4351 /* ApiUrls.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		8AA8335F2466DADB0042C441 /* module */ = {
@@ -163,11 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88FDC26D246EB81500FD4351 /* ApiExtensions.swift in Sources */,
 				8AA833662466DB950042C441 /* GithubSearchInteractor.swift in Sources */,
 				88B6C5842466D8970031D87A /* AppDelegate.swift in Sources */,
 				8AA833622466DB3C0042C441 /* GithubSearchViewController.swift in Sources */,
+				88FDC26E246EB81500FD4351 /* ApiUrls.swift in Sources */,
 				8AA833642466DB660042C441 /* GithubSearchPresenter.swift in Sources */,
 				8AA833682466DBA50042C441 /* GithubSearchRouter.swift in Sources */,
+				88FDC26C246EB81500FD4351 /* ApiService.swift in Sources */,
 				88B6C5862466D8970031D87A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
