@@ -24,6 +24,11 @@ class GithubSearchInteractor {
 
 extension GithubSearchInteractor: GithubSearchInteractorInterface {
     func search(with text: String) {
+        let service = ApiService<SearchApiResponse>()
+        service.getData(url: .searchRepository, key: text) { (result) in
+            
+            self.output?.handleSearchResult(with: result)
+        }
        //TODO: Network isteği atılıp gelen data handleSearchResult ile presenter'a paslanacak
     }
 }
