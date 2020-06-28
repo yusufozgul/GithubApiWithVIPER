@@ -8,7 +8,25 @@
 
 import Foundation
 
-enum ApiUrls: String {
-    case baseUrl = "https://api.github.com/"
-    case searchRepository = "search/repositories?q="
+struct Constant {
+    static let baseUrl = "https://api.github.com/"
+}
+
+enum APIRouter {
+    case searchRepository(keyword: String)
+    
+    var url: String {
+        switch self {
+        case .searchRepository(let keyword):
+            return Constant.baseUrl + "search/repositories?q=\(keyword)"
+        }
+    }
+    
+    var method: HttpMethod {
+        switch self {
+        case .searchRepository:
+            return .GET
+        }
+    }
+    
 }

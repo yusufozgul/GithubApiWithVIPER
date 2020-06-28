@@ -12,10 +12,8 @@ protocol GithubSearchInteractorInterface: class {
     func search(with text: String)
 }
 
-typealias SearchResult = Result<Codable, Error>
-
 protocol GithubSearchInteractorOutput: class {
-    func handleSearchResult(with result: SearchResult)
+    func handleSearchResult(with result: Result<SearchApiResponse, Error>)
 }
 
 class GithubSearchInteractor {
@@ -25,10 +23,13 @@ class GithubSearchInteractor {
 extension GithubSearchInteractor: GithubSearchInteractorInterface {
     func search(with text: String) {
         let service = ApiService<SearchApiResponse>()
-        service.getData(url: .searchRepository, key: text) { (result) in
-            
-            self.output?.handleSearchResult(with: result)
+        service.getData(router: .searchRepository(keyword: text)) { (result) in
+            switch result {
+            case .success(let response):
+                self.output?.handleSearchResult(with: .success(response))
+            case .failure(let error):
+                self.output?.handleSearchResult(with: .failure(error))
+            }
         }
-       //TODO: Network isteği atılıp gelen data handleSearchResult ile presenter'a paslanacak
     }
 }

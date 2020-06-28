@@ -38,13 +38,12 @@ extension GithubSearchPresenter: GithubSearchPresenterInterface {
 }
 
 extension GithubSearchPresenter: GithubSearchInteractorOutput {
-    func handleSearchResult(with result: SearchResult) {
+    func handleSearchResult(with result: Result<SearchApiResponse, Error>) {
         switch result {
         case .success(let response):
-            //TODO: Gelen response işlendikten sonra UI'a gönderilecek
-            break
-        case .failure(_):
-            break
+            print(response.items.map{ $0.name })
+        case .failure(let error):
+            print(error.localizedDescription)
         }
     }
 }

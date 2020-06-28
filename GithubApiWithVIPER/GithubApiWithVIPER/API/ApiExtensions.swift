@@ -8,15 +8,17 @@
 
 import Foundation
 
-struct GithubApiError: Error {
-
-    var errorDescription: String? { return _description }
-    var failureReason: String? { return _description }
-
-    private var _description: String
-
-    init(description: String) {
-        self._description = description
+enum GithubApiError: Error {
+    case network(errorMessage: String)
+    case decoding(errorMessage: String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .network(let message):
+            return message
+        case .decoding(let message):
+            return message
+        }
     }
 }
 
