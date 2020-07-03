@@ -33,6 +33,8 @@ class GithubSearchRouter {
         interactor.output = presenter
         view.presenter = presenter
         
+        view.title = "Search"
+        
         return view
     }
     

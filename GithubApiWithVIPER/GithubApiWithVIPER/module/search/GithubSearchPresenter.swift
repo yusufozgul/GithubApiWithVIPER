@@ -41,7 +41,18 @@ extension GithubSearchPresenter: GithubSearchInteractorOutput {
     func handleSearchResult(with result: Result<SearchApiResponse, Error>) {
         switch result {
         case .success(let response):
-            print(response.items.map{ $0.name })
+            
+            var repos: [SearchResultData] = []
+            response.items.forEach { (repo) in
+                repos.append(SearchResultData(id: repo.id,
+                                              name: repo.name,
+                                              starCount: repo.stargazersCount,
+                                              watchCount: repo.watchers,
+                                              language: repo.language,
+                                              ownerAvatarUrl: repo.owner.avatarUrl,
+                                              ownerUserName: repo.owner.login))
+            }
+            view?.showData(with: repos)
         case .failure(let error):
             print(error.localizedDescription)
         }
