@@ -8,17 +8,18 @@
 
 import UIKit
 
+typealias SearchRepoSnapshot = NSDiffableDataSourceSnapshot<RepoListSection, SearchResultData>
+
 protocol GithubSearchViewInterface: class {
     func prepareUI()
-    func showData(with data: [SearchResultData])
+    func showData(with snapshot: SearchRepoSnapshot)
 }
 
-private enum RepoListSection {
+enum RepoListSection {
     case repo
 }
 
 private typealias DataSource = UICollectionViewDiffableDataSource<RepoListSection, SearchResultData>
-private typealias Snapshot = NSDiffableDataSourceSnapshot<RepoListSection, SearchResultData>
 
 class GithubSearchViewController: UIViewController {
     
@@ -51,10 +52,7 @@ extension GithubSearchViewController: GithubSearchViewInterface {
         dataSource = makeDatasource()
     }
     
-    func showData(with data: [SearchResultData]) {
-        var snapshot = Snapshot()
-        snapshot.appendSections([.repo])
-        snapshot.appendItems(data, toSection: .repo)
+    func showData(with snapshot: SearchRepoSnapshot) {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
