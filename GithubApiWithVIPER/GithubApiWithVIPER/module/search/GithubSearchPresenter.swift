@@ -38,13 +38,33 @@ extension GithubSearchPresenter: GithubSearchPresenterInterface {
 }
 
 extension GithubSearchPresenter: GithubSearchInteractorOutput {
-    func handleSearchResult(with result: SearchResult) {
+    func handleSearchResult(with result: Result<SearchApiResponse, Error>) {
         switch result {
         case .success(let response):
-            //TODO: Gelen response işlendikten sonra UI'a gönderilecek
-            break
-        case .failure(_):
-            break
+            
+            let repos: [SearchResultData] = response.items.map({ SearchResultDataBuilder.make(with: $0)})
+            
+            var snapshot = SearchRepoSnapshot()
+            snapshot.appendSections([.repo])
+            snapshot.appendItems(repos, toSection: .repo)
+            
+            view?.showData(with: snapshot)
+        case .failure(let error):
+            print(error.localizedDescription)
         }
+    }
+}
+
+class SearchResultDataBuilder {
+    
+    class func make(with repo: Repo) -> SearchResultData {
+        
+        return SearchResultData(id: repo.id,
+                                name: repo.name,
+                                starCount: repo.stargazersCount,
+                                watchCount: repo.watchers,
+                                language: repo.language,
+                                ownerAvatarUrl: repo.owner.avatarUrl,
+                                ownerUserName: repo.owner.login)
     }
 }
