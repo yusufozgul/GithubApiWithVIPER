@@ -31,10 +31,6 @@ class GithubSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        presenter.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         presenter.viewDidLoad()
     }
 }
@@ -44,6 +40,13 @@ extension GithubSearchViewController: GithubSearchViewInterface {
         searchBar.delegate = self
         collectionView = makeCollectionView()
         self.view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+                                     collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+                                     collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 0),
+                                     collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        ])
         
         dataSource = makeDatasource()
     }
