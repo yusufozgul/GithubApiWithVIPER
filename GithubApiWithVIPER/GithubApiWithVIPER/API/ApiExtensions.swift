@@ -26,3 +26,7 @@ enum HttpMethod: String {
     case GET
     case POST
 }
+
+extension Encodable {
+    func toJSONData() -> Data? { try? JSONEncoder().encode(self) }
+}

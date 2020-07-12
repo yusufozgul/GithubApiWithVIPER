@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GithubSearchRouterInterface: class {
-    func navigateToProfileDetail()
+    func navigateToRepoDetail(to repoName: String)
 }
 
 class GithubSearchRouter {
@@ -41,7 +41,9 @@ class GithubSearchRouter {
 }
 
 extension GithubSearchRouter: GithubSearchRouterInterface {
-    func navigateToProfileDetail() {
-        //TODO: open profile detail
+    func navigateToRepoDetail(to repoName: String) {
+        
+        let repoDetailVC = RepoDetailRouter.createModule(repoName: repoName)
+        self.navigationController?.pushViewController(repoDetailVC, animated: true)
     }
 }

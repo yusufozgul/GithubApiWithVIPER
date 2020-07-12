@@ -12,21 +12,51 @@ struct Constant {
     static let baseUrl = "https://api.github.com/"
 }
 
-enum APIRouter {
-    case searchRepository(keyword: String)
+protocol ApiRequestProtocol {
+    var method: HttpMethod { get }
+    var url: URL! { get }
+    var body: Encodable? { get }
+}
+
+struct SearchRepoRequest: ApiRequestProtocol {
     
-    var url: String {
-        switch self {
-        case .searchRepository(let keyword):
-            return Constant.baseUrl + "search/repositories?q=\(keyword)"
+    var url: URL!
+    var method: HttpMethod = .GET
+    var body: Encodable? = nil
+    
+    mutating func generateUrl(keyword: String?) {
+        if let searchUrl = URL(string:  Constant.baseUrl + "search/repositories?q=\(keyword ?? "")") {
+            url = searchUrl
+            return
         }
+        fatalError("URL not encoded")
     }
+}
+
+struct RepoDetailRequest: ApiRequestProtocol {
+    var method: HttpMethod = .GET
+    var url: URL!
+    var body: Encodable? = nil
     
-    var method: HttpMethod {
-        switch self {
-        case .searchRepository:
-            return .GET
+    mutating func generateUrl(keyword: String?) {
+        if let searchUrl = URL(string:  Constant.baseUrl + "repos/\(keyword ?? "")") {
+            url = searchUrl
+            return
         }
+        fatalError("URL not encoded")
     }
+}
+
+struct RepoMDFileRequest: ApiRequestProtocol {
+    var method: HttpMethod = .GET
+    var url: URL!
+    var body: Encodable? = nil
     
+    mutating func generateUrl(keyword: String?) {
+        if let searchUrl = URL(string:  "https://raw.githubusercontent.com/" + (keyword ?? "") + "/README.md") {
+            url = searchUrl
+            return
+        }
+        fatalError("URL not encoded")
+    }
 }
