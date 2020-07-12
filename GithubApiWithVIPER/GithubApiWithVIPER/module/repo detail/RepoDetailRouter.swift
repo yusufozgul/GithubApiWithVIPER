@@ -6,4 +6,33 @@
 //  Copyright © 2020 Yusuf Özgül. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol RepoDetailRouterInterface: class {
+}
+
+class RepoDetailRouter {
+    
+    
+    static func createModule(repoName: String) -> RepoDetailVC {
+        let storyBoard = UIStoryboard.init(name: "RepoDetails", bundle: nil)
+        let view = storyBoard.instantiateViewController(identifier: "RepoDetailVC") as! RepoDetailVC
+        
+        let interactor = RepoDetailInteractor()
+        let router = RepoDetailRouter()
+        let presenter = RepoDetailPresenter.init(view: view,
+                                                 interactor: interactor,
+                                                 router: router,
+                                                 repoName: repoName)
+        
+        interactor.output = presenter
+        view.presenter = presenter
+        view.title = repoName
+        
+        return view
+    }
+}
+
+extension RepoDetailRouter: RepoDetailRouterInterface {
+    
+}
