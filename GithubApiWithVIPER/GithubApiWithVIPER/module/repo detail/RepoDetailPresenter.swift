@@ -7,3 +7,57 @@
 //
 
 import Foundation
+
+protocol RepoDetailPresenterInterface: class {
+    
+    func viewDidLoad()
+}
+
+class RepoDetailPresenter {
+    
+    weak var view: RepoDetailViewInterface?
+    private let interactor: RepoDetailInteractorInterface
+    private let router: RepoDetailRouterInterface
+    private let repoName: String
+    
+    init(view: RepoDetailViewInterface,
+         interactor: RepoDetailInteractorInterface,
+         router: RepoDetailRouterInterface,
+         repoName: String) {
+        
+        self.view = view
+        self.interactor = interactor
+        self.router = router
+        self.repoName = repoName
+    }
+}
+
+extension RepoDetailPresenter: RepoDetailPresenterInterface {
+    func viewDidLoad() {
+        view?.prepareUI()
+        self.interactor.fetch(to: repoName)
+    }
+}
+
+extension RepoDetailPresenter: RepoDetailInteractorOutput {
+    func handleResult(with result: Result<Repo, GithubApiError>) {
+        
+        switch result {
+        case .success(let repo):
+            view?.showRepoDetail(with: repo)
+            self.interactor.loadMDFile(path: repo.fullName + "/" + repo.defaultBranch)
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
+    func handleMarkdDownData(md: Result<Data, GithubApiError>) {
+        
+        switch md {
+        case .success(let rawMD):
+            view?.showMarkDown(md: String(data: rawMD, encoding: .utf8) ?? "")
+        case .failure(let error):
+            print(error)
+        }
+    }
+}
