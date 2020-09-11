@@ -54,15 +54,13 @@ extension GithubSearchPresenter: GithubSearchInteractorOutput {
             
             view?.showData(with: snapshot)
         case .failure(let error):
-            print(error.localizedDescription)
+            view?.showError(with: error.localizedDescription)
         }
     }
 }
 
 class SearchResultDataBuilder {
-    
     class func make(with repo: Repo) -> SearchResultData {
-        
         return SearchResultData(id: UUID().uuidString,
                                 name: repo.name,
                                 starCount: repo.stargazersCount,

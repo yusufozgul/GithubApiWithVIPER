@@ -23,17 +23,18 @@ class GithubSearchInteractor {
 extension GithubSearchInteractor: GithubSearchInteractorInterface {
     func search(with text: String) {
         let service = ApiService<SearchApiResponse>()
-        
-        var request = SearchRepoRequest()
-        request.generateUrl(keyword: text)
-        
-        service.getData(request: request) { (result) in
-            switch result {
-            case .success(let response):
-                self.output?.handleSearchResult(with: .success(response))
-            case .failure(let error):
-                self.output?.handleSearchResult(with: .failure(error))
+        do {
+            let request = try SearchRepoRequest(keyword: text)
+            service.getData(request: request) { (result) in
+                switch result {
+                case .success(let response):
+                    self.output?.handleSearchResult(with: .success(response))
+                case .failure(let error):
+                    self.output?.handleSearchResult(with: .failure(error))
+                }
             }
+        } catch {
+            self.output?.handleSearchResult(with: .failure(.urlEncode))
         }
     }
 }

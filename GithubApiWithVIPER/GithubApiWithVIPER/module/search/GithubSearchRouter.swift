@@ -13,7 +13,6 @@ protocol GithubSearchRouterInterface: class {
 }
 
 class GithubSearchRouter {
-    
     var navigationController: UINavigationController?
     
     init(navigationController: UINavigationController?) {
@@ -29,7 +28,6 @@ class GithubSearchRouter {
         let presenter = GithubSearchPresenter.init(view: view,
                                                    interactor: interactor,
                                                    router: router)
-        
         interactor.output = presenter
         view.presenter = presenter
         
@@ -42,7 +40,6 @@ class GithubSearchRouter {
 
 extension GithubSearchRouter: GithubSearchRouterInterface {
     func navigateToRepoDetail(to repoName: String) {
-        
         let repoDetailVC = RepoDetailRouter.createModule(repoName: repoName)
         self.navigationController?.pushViewController(repoDetailVC, animated: true)
     }

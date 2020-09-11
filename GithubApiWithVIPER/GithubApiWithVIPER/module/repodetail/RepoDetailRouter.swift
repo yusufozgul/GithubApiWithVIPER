@@ -8,12 +8,9 @@
 
 import UIKit
 
-protocol RepoDetailRouterInterface: class {
-}
+protocol RepoDetailRouterInterface: class { }
 
-class RepoDetailRouter {
-    
-    
+class RepoDetailRouter: RepoDetailRouterInterface {
     static func createModule(repoName: String) -> RepoDetailVC {
         let storyBoard = UIStoryboard.init(name: "RepoDetails", bundle: nil)
         let view = storyBoard.instantiateViewController(identifier: "RepoDetailVC") as! RepoDetailVC
@@ -24,15 +21,9 @@ class RepoDetailRouter {
                                                  interactor: interactor,
                                                  router: router,
                                                  repoName: repoName)
-        
         interactor.output = presenter
         view.presenter = presenter
         view.title = repoName
-        
         return view
     }
-}
-
-extension RepoDetailRouter: RepoDetailRouterInterface {
-    
 }

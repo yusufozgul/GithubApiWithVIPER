@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S2e-GV-l84">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S2e-GV-l84">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IaS-GV-LSp">
-                                <rect key="frame" x="20" y="96" width="275.5" height="92.5"/>
+                                <rect key="frame" x="20" y="96" width="276" height="92.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2ZE-6H-onT">
                                         <rect key="frame" x="0.0" y="0.0" width="77" height="92.5"/>
@@ -35,14 +35,14 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="m3K-XH-Oqn">
-                                        <rect key="frame" x="97" y="0.0" width="81.5" height="92.5"/>
+                                        <rect key="frame" x="97" y="0.0" width="82" height="92.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KlA-hI-DRT">
-                                                <rect key="frame" x="0.0" y="1.5" width="26.5" height="89"/>
+                                                <rect key="frame" x="0.0" y="1.5" width="27" height="89"/>
                                                 <color key="tintColor" systemColor="linkColor"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEn-hM-QGF">
-                                                <rect key="frame" x="31.5" y="0.0" width="50" height="92.5"/>
+                                                <rect key="frame" x="32" y="0.0" width="50" height="92.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PV0-Q0-ZXZ">
-                                        <rect key="frame" x="198.5" y="0.0" width="77" height="92.5"/>
+                                        <rect key="frame" x="199" y="0.0" width="77" height="92.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tuningfork" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o41-IK-pOs">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="92.5"/>
@@ -102,14 +102,19 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="zek-WK-lg4"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="pPs-cv-BrC"/>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="b9W-jO-2rT">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iwY-1S-j4k"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="IaS-GV-LSp" firstAttribute="top" secondItem="iwY-1S-j4k" secondAttribute="top" constant="8" id="3MK-lA-aK9"/>
                             <constraint firstItem="ge0-O4-Wq4" firstAttribute="top" secondItem="RqJ-l6-FZM" secondAttribute="bottom" constant="20" id="NJu-D4-ymC"/>
+                            <constraint firstItem="b9W-jO-2rT" firstAttribute="centerX" secondItem="gog-j2-Ro3" secondAttribute="centerX" id="QTg-6G-Oc2"/>
                             <constraint firstItem="ge0-O4-Wq4" firstAttribute="leading" secondItem="iwY-1S-j4k" secondAttribute="leading" id="VNo-eI-of8"/>
                             <constraint firstItem="IaS-GV-LSp" firstAttribute="leading" secondItem="iwY-1S-j4k" secondAttribute="leading" constant="20" id="nLZ-es-IOt"/>
+                            <constraint firstItem="b9W-jO-2rT" firstAttribute="centerY" secondItem="gog-j2-Ro3" secondAttribute="centerY" id="p5G-ez-qZC"/>
                             <constraint firstItem="RqJ-l6-FZM" firstAttribute="top" secondItem="IaS-GV-LSp" secondAttribute="bottom" constant="20" id="pnH-YF-Fiw"/>
                             <constraint firstItem="RqJ-l6-FZM" firstAttribute="leading" secondItem="iwY-1S-j4k" secondAttribute="leading" constant="20" id="rA2-et-Q0S"/>
                             <constraint firstItem="iwY-1S-j4k" firstAttribute="trailing" secondItem="ge0-O4-Wq4" secondAttribute="trailing" id="rUZ-Rb-uiT"/>
@@ -122,6 +127,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="RqJ-l6-FZM" id="jjv-eF-tQA"/>
                         <outlet property="forksCount" destination="ARn-Nj-gKL" id="XQn-H9-tqL"/>
+                        <outlet property="loadingIndicator" destination="b9W-jO-2rT" id="Vhb-qn-Gn4"/>
                         <outlet property="markdownView" destination="QFb-bv-d4W" id="rC1-3l-xzd"/>
                         <outlet property="startsCount" destination="u49-af-3WS" id="LWe-Ls-63I"/>
                         <outlet property="watchersCount" destination="oEn-hM-QGF" id="COW-Uh-kTB"/>
@@ -151,7 +157,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="eye.fill" catalog="system" width="128" height="79"/>
+        <image name="eye.fill" catalog="system" width="128" height="78"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="tuningfork" catalog="system" width="128" height="116"/>
         <systemColor name="linkColor">

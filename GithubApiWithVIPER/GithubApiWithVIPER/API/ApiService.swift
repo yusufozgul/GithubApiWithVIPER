@@ -17,12 +17,14 @@ class ApiService<T: Codable> {
         urlRequest.httpBody = request.body?.toJSONData()
         
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard error == nil && data != nil else {
+            guard error == nil else {
                 completion(.failure(.network(errorMessage: error?.localizedDescription ?? "unexpected error")))
                 return
             }
+            if let data = data {
+                completion(self.parseData(data: data))
+            }
             
-            completion(self.parseData(data: data!))
         }
         task.resume()
     }

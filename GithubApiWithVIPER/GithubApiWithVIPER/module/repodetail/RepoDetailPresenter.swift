@@ -14,7 +14,6 @@ protocol RepoDetailPresenterInterface: class {
 }
 
 class RepoDetailPresenter {
-    
     weak var view: RepoDetailViewInterface?
     private let interactor: RepoDetailInteractorInterface
     private let router: RepoDetailRouterInterface
@@ -34,30 +33,29 @@ class RepoDetailPresenter {
 
 extension RepoDetailPresenter: RepoDetailPresenterInterface {
     func viewDidLoad() {
-        view?.prepareUI()
         self.interactor.fetch(to: repoName)
+        self.view?.setLoading(to: true)
     }
 }
 
 extension RepoDetailPresenter: RepoDetailInteractorOutput {
     func handleResult(with result: Result<Repo, GithubApiError>) {
-        
         switch result {
         case .success(let repo):
             view?.showRepoDetail(with: repo)
             self.interactor.loadMDFile(path: repo.fullName + "/" + repo.defaultBranch)
         case .failure(let error):
-            print(error)
+            view?.showError(with: error.localizedDescription)
         }
     }
     
     func handleMarkdDownData(md: Result<Data, GithubApiError>) {
-        
+        self.view?.setLoading(to: false)
         switch md {
         case .success(let rawMD):
             view?.showMarkDown(md: String(data: rawMD, encoding: .utf8) ?? "")
         case .failure(let error):
-            print(error)
+            view?.showError(with: error.localizedDescription)
         }
     }
 }

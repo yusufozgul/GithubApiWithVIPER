@@ -23,23 +23,28 @@ class RepoDetailInteractor {
 }
 
 extension RepoDetailInteractor: RepoDetailInteractorInterface {
-    
     func fetch(to repoName: String) {
-        let service = ApiService<Repo>()
-        var request = RepoDetailRequest()
-        request.generateUrl(keyword: repoName)
-        
-        service.getData(request: request) { (result) in
-            self.output?.handleResult(with: result)
+        do {
+            let service = ApiService<Repo>()
+            let request = try RepoDetailRequest(keyword: repoName)
+            
+            service.getData(request: request) { (result) in
+                self.output?.handleResult(with: result)
+            }
+        } catch {
+            self.output?.handleResult(with: .failure(.urlEncode))
         }
     }
     
     func loadMDFile(path: String) {
-        let service = RawDataService()
-        var request = RepoMDFileRequest()
-        request.generateUrl(keyword: path)
-        service.getRawData(request: request) { (result) in
-            self.output?.handleMarkdDownData(md: result)
+        do {
+            let service = RawDataService()
+            let request = try RepoMDFileRequest(keyword: path)
+            service.getRawData(request: request) { (result) in
+                self.output?.handleMarkdDownData(md: result)
+            }
+        } catch {
+            self.output?.handleResult(with: .failure(.urlEncode))
         }
     }
 }

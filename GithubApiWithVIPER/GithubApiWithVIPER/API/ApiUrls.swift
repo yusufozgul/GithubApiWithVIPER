@@ -14,49 +14,48 @@ struct Constant {
 
 protocol ApiRequestProtocol {
     var method: HttpMethod { get }
-    var url: URL! { get }
+    var url: URL { get }
     var body: Encodable? { get }
 }
 
 struct SearchRepoRequest: ApiRequestProtocol {
-    
-    var url: URL!
+    var url: URL
     var method: HttpMethod = .GET
     var body: Encodable? = nil
     
-    mutating func generateUrl(keyword: String?) {
-        if let searchUrl = URL(string:  Constant.baseUrl + "search/repositories?q=\(keyword ?? "")") {
-            url = searchUrl
-            return
+    init(keyword: String) throws {
+        if let searchUrl = URL(string:  Constant.baseUrl + "search/repositories?q=\(keyword)") {
+            self.url = searchUrl
+        } else {
+            throw GithubApiError.urlEncode
         }
-        fatalError("URL not encoded")
     }
 }
 
 struct RepoDetailRequest: ApiRequestProtocol {
     var method: HttpMethod = .GET
-    var url: URL!
+    var url: URL
     var body: Encodable? = nil
     
-    mutating func generateUrl(keyword: String?) {
-        if let searchUrl = URL(string:  Constant.baseUrl + "repos/\(keyword ?? "")") {
-            url = searchUrl
-            return
+    init(keyword: String) throws {
+        if let searchUrl = URL(string:  Constant.baseUrl + "repos/\(keyword)") {
+            self.url = searchUrl
+        } else {
+            throw GithubApiError.urlEncode
         }
-        fatalError("URL not encoded")
     }
 }
 
 struct RepoMDFileRequest: ApiRequestProtocol {
     var method: HttpMethod = .GET
-    var url: URL!
+    var url: URL
     var body: Encodable? = nil
     
-    mutating func generateUrl(keyword: String?) {
-        if let searchUrl = URL(string:  "https://raw.githubusercontent.com/" + (keyword ?? "") + "/README.md") {
-            url = searchUrl
-            return
+    init(keyword: String) throws {
+        if let searchUrl = URL(string:  "https://raw.githubusercontent.com/" + (keyword) + "/README.md") {
+            self.url = searchUrl
+        } else {
+            throw GithubApiError.urlEncode
         }
-        fatalError("URL not encoded")
     }
 }
