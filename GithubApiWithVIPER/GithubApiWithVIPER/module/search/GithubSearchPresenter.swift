@@ -10,14 +10,15 @@ import Foundation
 
 protocol GithubSearchPresenterInterface: class {
     func viewDidLoad()
-    
     func searchBarTextDidChange(text: String)
+    func selectRepo(at indexPath: IndexPath)
 }
 
 class GithubSearchPresenter {
     weak var view: GithubSearchViewInterface?
     private let interactor: GithubSearchInteractorInterface
     private let router: GithubSearchRouterInterface
+    private var searchRepoResult: [SearchResultData] = []
     
     init(view: GithubSearchViewInterface, interactor: GithubSearchInteractorInterface, router: GithubSearchRouterInterface) {
         self.view = view
@@ -35,36 +36,38 @@ extension GithubSearchPresenter: GithubSearchPresenterInterface {
     func searchBarTextDidChange(text: String) {
         interactor.search(with: text)
     }
+    
+    func selectRepo(at indexPath: IndexPath) {
+        let repo = searchRepoResult[indexPath.row]
+        self.router.navigateToRepoDetail(to: repo.fullName)
+    }
 }
 
 extension GithubSearchPresenter: GithubSearchInteractorOutput {
-    func handleSearchResult(with result: Result<SearchApiResponse, Error>) {
+    func handleSearchResult(with result: Result<SearchApiResponse, GithubApiError>) {
         switch result {
         case .success(let response):
-            
-            let repos: [SearchResultData] = response.items.map({ SearchResultDataBuilder.make(with: $0)})
-            
+            searchRepoResult = response.items.map({ SearchResultDataBuilder.make(with: $0)})
             var snapshot = SearchRepoSnapshot()
             snapshot.appendSections([.repo])
-            snapshot.appendItems(repos, toSection: .repo)
+            snapshot.appendItems(searchRepoResult, toSection: .repo)
             
             view?.showData(with: snapshot)
         case .failure(let error):
-            print(error.localizedDescription)
+            view?.showError(with: error.localizedDescription)
         }
     }
 }
 
 class SearchResultDataBuilder {
-    
     class func make(with repo: Repo) -> SearchResultData {
-        
-        return SearchResultData(id: repo.id,
+        return SearchResultData(id: UUID().uuidString,
                                 name: repo.name,
                                 starCount: repo.stargazersCount,
                                 watchCount: repo.watchers,
                                 language: repo.language,
                                 ownerAvatarUrl: repo.owner.avatarUrl,
-                                ownerUserName: repo.owner.login)
+                                ownerUserName: repo.owner.login,
+                                fullName: repo.fullName)
     }
 }

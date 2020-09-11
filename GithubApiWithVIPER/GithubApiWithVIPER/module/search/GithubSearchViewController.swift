@@ -13,6 +13,7 @@ typealias SearchRepoSnapshot = NSDiffableDataSourceSnapshot<RepoListSection, Sea
 protocol GithubSearchViewInterface: class {
     func prepareUI()
     func showData(with snapshot: SearchRepoSnapshot)
+    func showError(with description: String)
 }
 
 enum RepoListSection {
@@ -22,11 +23,9 @@ enum RepoListSection {
 private typealias DataSource = UICollectionViewDiffableDataSource<RepoListSection, SearchResultData>
 
 class GithubSearchViewController: UIViewController {
-    
     @IBOutlet private weak var searchBar: UISearchBar!
     
     var presenter: GithubSearchPresenterInterface!
-    
     var collectionView: UICollectionView!
     private var dataSource: DataSource!
     
@@ -55,11 +54,16 @@ extension GithubSearchViewController: GithubSearchViewInterface {
     func showData(with snapshot: SearchRepoSnapshot) {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
+    
+    func showError(with description: String) {
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension GithubSearchViewController: UICollectionViewDelegate {
     func makeCollectionView() -> UICollectionView {
-        
         let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         
@@ -71,7 +75,6 @@ extension GithubSearchViewController: UICollectionViewDelegate {
     
     func makeCell() -> UICollectionView.CellRegistration<UICollectionViewListCell, SearchResultData> {
             UICollectionView.CellRegistration { cell, indexPath, repo in
-                
                 var config = cell.defaultContentConfiguration()
                 config.text = repo.name
                 config.secondaryText = repo.ownerUserName
@@ -83,7 +86,6 @@ extension GithubSearchViewController: UICollectionViewDelegate {
     
     private func makeDatasource() -> DataSource {
         let cell = makeCell()
-        
         return DataSource(collectionView: collectionView) { (collectionView, indexPath, repo) -> UICollectionViewCell? in
             collectionView.dequeueConfiguredReusableCell(using: cell, for: indexPath, item: repo)
         }
@@ -91,6 +93,7 @@ extension GithubSearchViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        presenter.selectRepo(at: indexPath)
     }
 }
 

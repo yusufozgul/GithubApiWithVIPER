@@ -11,6 +11,7 @@ import Foundation
 enum GithubApiError: Error {
     case network(errorMessage: String)
     case decoding(errorMessage: String)
+    case urlEncode
     
     var localizedDescription: String {
         switch self {
@@ -18,6 +19,8 @@ enum GithubApiError: Error {
             return message
         case .decoding(let message):
             return message
+        case .urlEncode:
+            return "Url encode error"
         }
     }
 }
@@ -25,4 +28,8 @@ enum GithubApiError: Error {
 enum HttpMethod: String {
     case GET
     case POST
+}
+
+extension Encodable {
+    func toJSONData() -> Data? { try? JSONEncoder().encode(self) }
 }

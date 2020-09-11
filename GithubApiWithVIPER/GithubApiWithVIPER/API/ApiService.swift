@@ -10,21 +10,21 @@ import Foundation
 
 class ApiService<T: Codable> {
     
-    func getData(router: APIRouter, completion: @escaping (Result<T, GithubApiError>) -> Void) {
-        guard let url = URL(string: router.url) else {
-            completion(.failure(.network(errorMessage: "Url not encoded")))
-            return
-        }
+    func getData(request: ApiRequestProtocol, completion: @escaping (Result<T, GithubApiError>) -> Void) {
         
-        var request = URLRequest(url: url)
-        request.httpMethod = router.method.rawValue
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard error == nil && data != nil else {
+        var urlRequest = URLRequest(url: request.url)
+        urlRequest.httpMethod = request.method.rawValue
+        urlRequest.httpBody = request.body?.toJSONData()
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard error == nil else {
                 completion(.failure(.network(errorMessage: error?.localizedDescription ?? "unexpected error")))
                 return
             }
+            if let data = data {
+                completion(self.parseData(data: data))
+            }
             
-            completion(self.parseData(data: data!))
         }
         task.resume()
     }
@@ -47,5 +47,25 @@ class ApiService<T: Codable> {
         } catch {
             return .failure(.decoding(errorMessage: "unknown json parse error"))
         }
+    }
+}
+
+class RawDataService {
+    
+    func getRawData(request: ApiRequestProtocol, completion: @escaping (Result<Data, GithubApiError>) -> Void) {
+        
+        var urlRequest = URLRequest(url: request.url)
+        urlRequest.httpMethod = request.method.rawValue
+        urlRequest.httpBody = request.body?.toJSONData()
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard error == nil || data != nil else {
+                completion(.failure(.network(errorMessage: error?.localizedDescription ?? "unexpected error")))
+                return
+            }
+            
+            completion(.success(data!))
+        }
+        task.resume()
     }
 }

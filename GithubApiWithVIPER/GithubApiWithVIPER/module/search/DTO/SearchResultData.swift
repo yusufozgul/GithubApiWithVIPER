@@ -9,11 +9,12 @@
 import Foundation
 
 struct SearchResultData: Identifiable, Hashable {
-    let id: Int
+    let id: String
     let name: String
     let starCount: Int
     let watchCount: Int
     let language: String?
     let ownerAvatarUrl: String
     let ownerUserName: String
+    let fullName: String
 }
