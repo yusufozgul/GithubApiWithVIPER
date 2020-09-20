@@ -12,6 +12,11 @@ Github application written in Swift using VIPER architecture.
 
 
 ------------
+### Viper Architecture Diagram
+
+![](https://github.com/yusufozgul/GithubApiWithVIPER/blob/master/Github/ViperDiagram.png)
+
+------------
 
 ![](https://github.com/yusufozgul/GithubApiWithVIPER/blob/master/Github/SS1.png)
 
