@@ -18,7 +18,7 @@ class GithubSearchPresenter {
     weak var view: GithubSearchViewInterface?
     private let interactor: GithubSearchInteractorInterface
     private let router: GithubSearchRouterInterface
-    private var searchRepoResult: [SearchResultData] = []
+    private(set) var searchRepoResult: [SearchResultData] = []
     
     init(view: GithubSearchViewInterface, interactor: GithubSearchInteractorInterface, router: GithubSearchRouterInterface) {
         self.view = view
