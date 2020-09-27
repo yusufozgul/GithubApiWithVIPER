@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97E641CD2517A75300B7FE17"
+               BuildableName = "GithubApiWithVIPERTests.xctest"
+               BlueprintName = "GithubApiWithVIPERTests"
+               ReferencedContainer = "container:GithubApiWithVIPER.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
